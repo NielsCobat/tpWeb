@@ -7,4 +7,8 @@ function Position(x, y) {
 
 function Color(hexa) {
 	this.hexaCode = hexa;
+
+
+function LineWidth(val) {
+	this.value = val;
 }
