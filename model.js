@@ -9,6 +9,10 @@ function Drawing() {
 		this.shapes.push(shape);
 	}.bind(this);
 
+	this.getForms = function () {
+		return this.shapes;
+	}.bind(this);
+
 };
 
 function Shape(width, color) {

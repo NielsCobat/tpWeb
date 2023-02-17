@@ -9,6 +9,18 @@ function Pencil(ctx, drawing, canvas) {
 
 	// Liez ici les widgets à la classe pour modifier les attributs présents ci-dessus.
 
+	this.setLineWidth = function(newWidth) {
+		this.currLineWidth = newWidth;
+	}.bind(this);
+
+	this.setColor = function(newColor) {
+		this.currColour = newColor;
+	}.bind(this);
+
+	this.setShape = function(newShape) {
+		this.currEditingMode = newShape;
+	}.bind(this);
+
 	new DnD(canvas, this);
 
 	// Implémentez ici les 3 fonctions onInteractionStart, onInteractionUpdate et onInteractionEnd
@@ -18,11 +30,15 @@ function Pencil(ctx, drawing, canvas) {
 		case editingMode.rect: {
 			this.currentShape =
 				new Rectangle(dnd.startPos.x, dnd.startPos.y, 0, 0, this.currLineWidth, this.currColour);
+			drawing.paint(ctx);
+			this.currentShape.paint(ctx);
 			break;
 		}
 		case editingMode.line: {
 			this.currentShape =
 				new Line(dnd.startPos.x, dnd.startPos.y, dnd.startPos.x, dnd.startPos.y, this.currLineWidth, this.currColour);
+			drawing.paint(ctx);
+			this.currentShape.paint(ctx);
 			break;
 		}
 		}
@@ -34,11 +50,15 @@ function Pencil(ctx, drawing, canvas) {
 			this.currentShape =
 				new Rectangle(dnd.startPos.x, dnd.startPos.y, dnd.currentPos.x - dnd.startPos.x,
 					dnd.currentPos.y - dnd.startPos.y, this.currLineWidth, this.currColour);
+			drawing.paint(ctx);
+			this.currentShape.paint(ctx);
 			break;
 		}
 		case editingMode.line: {
 			this.currentShape =
 				new Line(dnd.startPos.x, dnd.startPos.y, dnd.currentPos.x, dnd.currentPos.y, this.currLineWidth, this.currColour);
+			drawing.paint(ctx);
+			this.currentShape.paint(ctx);
 			break;
 		}
 		}
@@ -57,6 +77,7 @@ function Pencil(ctx, drawing, canvas) {
 			break;
 		}
 		}
+		drawing.paint(ctx, canvas);
 	}.bind(this);
 
 };
