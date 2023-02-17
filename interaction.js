@@ -10,6 +10,7 @@ function DnD(canvas, interactor) {
 	// Définir ici les attributs de la 'classe'
   this.startPos = new Position(0, 0);
   this.endPos = new Position(0, 0);
+  this.currentPos = new Position(0, 0);
   this.isMouseDown = false;
 
 	// Developper les 3 fonctions gérant les événements
@@ -19,13 +20,17 @@ function DnD(canvas, interactor) {
       this.startPos.x = pos.x;
       this.startPos.y = pos.y;
       this.isMouseDown = true;
+      interactor.onInteractionStart(this);
       console.log("Mouse pressed at : [" + this.startPos.x + ";" + this.startPos.y + "]");
     }
   }.bind(this);
 
   this.mouseMove = function(evt) {
     if (this.isMouseDown) {
-
+      let pos = getMousePosition(canvas, evt);
+      this.currentPos.x = pos.x;
+      this.currentPos.y = pos.y;
+      interactor.onInteractionUpdate(this);
     }
 
   }.bind(this);
@@ -36,6 +41,7 @@ function DnD(canvas, interactor) {
       this.endPos.x = pos.x;
       this.endPos.y = pos.y;
       this.isMouseDown = false;
+      interactor.onInteractionEnd(this);
       console.log("Mouse released at : [" + this.endPos.x + ";" + this.endPos.y + "]");
     }
   }.bind(this);
