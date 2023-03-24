@@ -2,7 +2,7 @@
 var canvas = document.getElementById('myCanvas');
 var ctx = canvas.getContext('2d');
 
-canvas.width=800
+canvas.width=770
 canvas.height=600
 
 // Code temporaire pour tester le DnD
@@ -22,6 +22,19 @@ canvas.height=600
 
 // Code final à utiliser pour manipuler Pencil.
 var drawing = new Drawing();
-var pencil = new Pencil(ctx, drawing, canvas);
-drawing.paint(ctx, canvas);
+var pencil = new Pencil(ctx, drawing, canvas, document);
 
+var editingMode = { rect: 0, line: 1 };
+document.getElementById("butRect").onclick = () => { pencil.setShape(editingMode.rect) }
+document.getElementById("butLine").onclick = () => { pencil.setShape(editingMode.line) }
+
+var width = document.getElementById("spinnerWidth");
+width.onclick = () => { pencil.setLineWidth(width.value) }
+
+var color = document.getElementById("colour");
+color.addEventListener("change", () => {
+	pencil.setColor(color.value);
+}, false);
+
+
+drawing.paint(ctx, canvas);

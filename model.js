@@ -4,9 +4,23 @@
 
 function Drawing() {
 	this.shapes = new Array();
+	this.shapeCount = 0;
 
 	this.addShape = function(shape) {
 		this.shapes.push(shape);
+		this.shapeCount++;
+	}.bind(this);
+
+	this.removeShape = function(countId) {
+		this.shapes[countId - 1] = new Shape(0, 0);
+	}.bind(this);
+
+	this.getShape = function(countId) {
+		return this.shapes[countId - 1];
+	}.bind(this);
+
+	this.getShapeCount = function() {
+		return this.shapeCount;
 	}.bind(this);
 
 	this.getForms = function () {
@@ -18,6 +32,10 @@ function Drawing() {
 function Shape(width, color) {
 	this.lineWidth = width;
 	this.color = color;
+
+	this.addWidth = function(value) {
+		this.lineWidth += value;
+	}.bind(this);
 };
 
 function Rectangle(topLeftCornerX, topLeftCornerY, width, height, lineWidth, color) {

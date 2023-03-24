@@ -21,7 +21,7 @@ function DnD(canvas, interactor) {
       this.startPos.y = pos.y;
       this.isMouseDown = true;
       interactor.onInteractionStart(this);
-      console.log("Mouse pressed at : [" + this.startPos.x + ";" + this.startPos.y + "]");
+      //console.log("Mouse pressed at : [" + this.startPos.x + ";" + this.startPos.y + "]");
     }
   }.bind(this);
 
@@ -42,7 +42,7 @@ function DnD(canvas, interactor) {
       this.endPos.y = pos.y;
       this.isMouseDown = false;
       interactor.onInteractionEnd(this);
-      console.log("Mouse released at : [" + this.endPos.x + ";" + this.endPos.y + "]");
+      //console.log("Mouse released at : [" + this.endPos.x + ";" + this.endPos.y + "]");
     }
   }.bind(this);
 
